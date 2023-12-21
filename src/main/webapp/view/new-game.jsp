@@ -3,7 +3,7 @@
 
     <head>
         <title>Tennis Scoreboard</title>
-        <link rel="stylesheet" href="./new-game-style.css" />
+        <link rel="stylesheet" href="view/new-game-style.css" />
     </head>
 
     <body>
@@ -11,16 +11,15 @@
             <form action = "new-match" method="POST">
 
                 <div class="inputDiv">
-                    <label for="player1Name">First Player Name:</label>
-                    <input type="text" name="player1Name"/>
+                    First Player: <input type="text" name="player1Name"/>
                 </div>
 
                 <div class="inputDiv">
-                    <label for="player2Name">Second Player Name:</label>
-                    <input type="text" name="player2Name"/>
+                    Second Player: <input type="text" name="player2Name"/>
                 </div>
 
                 <div class="button">
+                    <a href="view/match-score.jsp">Here</a>
                     <input type="submit" value="Submit"/>
                 </div>
 
