@@ -38,36 +38,10 @@ public class OverallGameScore {
         }
     }
 
-    private boolean increaseMatchScore() {
-
-        int firstPlayerScore = player1.getSetScore().getScore();
-        int secondPlayerScore = player2.getSetScore().getScore();
-
-        if (firstPlayerScore >= 6 || secondPlayerScore >= 6) {
-            int difference = firstPlayerScore - secondPlayerScore;
-
-            if (difference >= 2) {
-                player1.addMatchScore();
-                return true;
-            } else if (difference <= -2) {
-                player2.addMatchScore();
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public void setRoundScoresToZero() {
 
         player1.getGameScore().setScore(0);
         player2.getGameScore().setScore(0);
-    }
-
-    private void setSetScoresToZero() {
-
-        player1.getSetScore().setScore(0);
-        player2.getSetScore().setScore(0);
     }
 
     private boolean increaseSetScore() {
@@ -88,6 +62,40 @@ public class OverallGameScore {
             }
         }
         return false;
+    }
+
+    private void setSetScoresToZero() {
+
+        player1.getSetScore().setScore(0);
+        player2.getSetScore().setScore(0);
+    }
+
+    private boolean increaseMatchScore() {
+
+        int firstPlayerScore = player1.getSetScore().getScore();
+        int secondPlayerScore = player2.getSetScore().getScore();
+
+        if (firstPlayerScore >= 6 || secondPlayerScore >= 6) {
+            int difference = firstPlayerScore - secondPlayerScore;
+
+            if (difference >= 2) {
+                player1.addMatchScore();
+                return true;
+            } else if (difference <= -2) {
+                player2.addMatchScore();
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public Player winner() {
+
+        int firstPlayerScore = player1.getMatchScore().getScore();
+        int secondPlayerScore = player2.getMatchScore().getScore();
+
+        return firstPlayerScore == 2 ? player1 : (secondPlayerScore == 2 ? player2 : null);
     }
 
     @Override
