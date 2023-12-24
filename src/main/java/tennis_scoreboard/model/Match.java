@@ -9,15 +9,18 @@ import java.util.UUID;
 @Table(name = "matches")
 public class Match {
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "match_id")
+    private int id;
+    @Transient
     private UUID uuid;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "player1_id")
     private Player player1;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "player2_id")
     private Player player2;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "winner_id")
     private Player winner;
 
@@ -38,6 +41,14 @@ public class Match {
 
     public Match() {
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public UUID getUuid() {
