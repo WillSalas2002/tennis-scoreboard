@@ -5,19 +5,41 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import tennis_scoreboard.dao.FinishedMatchesPersistenceService;
+import tennis_scoreboard.dao.FinishedMatchesPersistenceServiceImpl;
+import tennis_scoreboard.model.Match;
+import tennis_scoreboard.model.Player;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.UUID;
 
 @WebServlet("/new-match")
 public class NewMatchServlet extends HttpServlet {
-
+    private final FinishedMatchesPersistenceService service = new FinishedMatchesPersistenceServiceImpl();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name1 = req.getParameter("player1Name");
         String name2 = req.getParameter("player2Name");
 
-        PrintWriter pr = resp.getWriter();
-        pr.println("<h1>" + name1 + " " + name2 + "</h1>");
+        Player player1 = service.getPlayerByName(name1);
+        Player player2 = service.getPlayerByName(name2);
+
+        if (player1 == null) {
+            player1 = new Player(name1);
+            service.savePlayers(player1);
+        }
+
+        if (player2 == null) {
+            player2 = new Player(name2);
+            service.savePlayers(player2);
+        }
+
+        Match match = new Match(player1, player2);
+
+        MatchTemp.storeMatch(match);
+
+        UUID matchUuid = match.getUuid();
+
+        resp.sendRedirect("/match-score?uuid=" + matchUuid);
     }
 }
