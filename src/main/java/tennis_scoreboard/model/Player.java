@@ -6,7 +6,7 @@ import tennis_scoreboard.score_calculator.MatchScore;
 import tennis_scoreboard.score_calculator.SetScore;
 
 @Entity
-@Table(name = "players")
+@Table(name = "players", uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
 public class Player {
 
     @Id
@@ -35,6 +35,10 @@ public class Player {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
