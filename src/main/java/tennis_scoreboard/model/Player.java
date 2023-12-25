@@ -13,7 +13,7 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
     @Transient
     private GameScore gameScore;
@@ -67,6 +67,18 @@ public class Player {
 
     public MatchScore getMatchScore() {
         return matchScore;
+    }
+
+    public void setGameScore(GameScore gameScore) {
+        this.gameScore = gameScore;
+    }
+
+    public void setSetScore(SetScore setScore) {
+        this.setScore = setScore;
+    }
+
+    public void setMatchScore(MatchScore matchScore) {
+        this.matchScore = matchScore;
     }
 
     @Override
