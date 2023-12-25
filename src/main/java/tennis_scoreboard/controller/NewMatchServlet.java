@@ -9,6 +9,9 @@ import tennis_scoreboard.dao.FinishedMatchesPersistenceService;
 import tennis_scoreboard.dao.FinishedMatchesPersistenceServiceImpl;
 import tennis_scoreboard.model.Match;
 import tennis_scoreboard.model.Player;
+import tennis_scoreboard.score_calculator.GameScore;
+import tennis_scoreboard.score_calculator.MatchScore;
+import tennis_scoreboard.score_calculator.SetScore;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -27,11 +30,19 @@ public class NewMatchServlet extends HttpServlet {
         if (player1 == null) {
             player1 = new Player(name1);
             service.savePlayers(player1);
+        } else {
+            player1.setMatchScore(new MatchScore());
+            player1.setGameScore(new GameScore());
+            player1.setSetScore(new SetScore());
         }
 
         if (player2 == null) {
             player2 = new Player(name2);
             service.savePlayers(player2);
+        } else {
+            player2.setMatchScore(new MatchScore());
+            player2.setGameScore(new GameScore());
+            player2.setSetScore(new SetScore());
         }
 
         Match match = new Match(player1, player2);
