@@ -12,9 +12,11 @@ public interface FinishedMatchesPersistenceService {
 
     Player getPlayerByName(String name);
 
-    long getCountInMatchTable();
+    long getCountOfMatchTable();
 
     List<Match> getTotalMatches(int offset, int limit);
 
     List<Match> getMatchesByPlayerName(String nameToLookFor, int offset, int limit);
+
+    long getCountOfMatchTableWithName(String name);
 }
