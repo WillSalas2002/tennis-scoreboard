@@ -28,20 +28,25 @@ public class MatchesServlet extends HttpServlet {
             currentPage = Integer.parseInt(pageStr);
         }
 
-        long totalMatchesCount = service.getCountInMatchTable();
-        int matchesPerPage = 4;
-        double pages = Math.ceil(((double) totalMatchesCount) / matchesPerPage);
+        int totalMatchesCount;
+        int matchesPerPage = 5;
 
         List<Match> matchList;
 
         if (nameToLookFor != null && !nameToLookFor.isBlank()) {
+            req.setAttribute("nameToLookFor", nameToLookFor);
             matchList = service.getMatchesByPlayerName(nameToLookFor.trim(), (currentPage - 1) * matchesPerPage, matchesPerPage);
+            totalMatchesCount = (int)service.getCountOfMatchTableWithName(nameToLookFor);
         } else {
             matchList = service.getTotalMatches((currentPage - 1) * matchesPerPage, matchesPerPage);
+            totalMatchesCount = (int)service.getCountOfMatchTable();
         }
 
-        req.setAttribute("matchList", matchList);
+        int totalPages = (int) Math.ceil(((double) totalMatchesCount) / matchesPerPage);
 
-        req.getRequestDispatcher("/view/matches-list.jsp").forward(req, resp);
+        req.setAttribute("matchList", matchList);
+        req.setAttribute("totalPages", totalPages);
+
+        getServletContext().getRequestDispatcher("/view/matches-list.jsp").forward(req, resp);
     }
 }
