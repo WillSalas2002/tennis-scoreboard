@@ -51,6 +51,6 @@ public class NewMatchServlet extends HttpServlet {
 
         UUID matchUuid = match.getUuid();
 
-        resp.sendRedirect("/match-score?uuid=" + matchUuid);
+        resp.sendRedirect("http://localhost:8080/match-score?uuid=" + matchUuid);
     }
 }
