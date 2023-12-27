@@ -8,7 +8,7 @@
 
     <body>
         <div class="container">
-            <form action = "new-match" method="POST">
+            <form action = "http://localhost:8080/new-match" method="POST">
 
                 <div class="inputDiv">
                     First Player: <input type="text" name="player1Name"/>
@@ -19,7 +19,6 @@
                 </div>
 
                 <div class="button">
-                    <a href="view/match-score.jsp">Here</a>
                     <input type="submit" value="Submit"/>
                 </div>
 
