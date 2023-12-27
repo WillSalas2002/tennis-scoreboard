@@ -62,7 +62,7 @@ public class FinishedMatchesPersistenceServiceImpl implements FinishedMatchesPer
     }
 
     @Override
-    public long getCountInMatchTable() {
+    public long getCountOfMatchTable() {
 
         long count = 0;
 
@@ -105,5 +105,22 @@ public class FinishedMatchesPersistenceServiceImpl implements FinishedMatchesPer
 
         return matchList;
 
+    }
+
+    @Override
+    public long getCountOfMatchTableWithName(String name) {
+
+        long count;
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+            session.beginTransaction();
+            count = session.createQuery("SELECT COUNT(*) FROM Match m WHERE m.player1.name = :name OR m.player2.name = :name", Long.class)
+                    .setParameter("name", name)
+                    .getSingleResult();
+
+        }
+
+        return (int)count;
     }
 }
