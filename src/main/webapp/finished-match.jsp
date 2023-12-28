@@ -2,28 +2,32 @@
 <html>
 <head>
     <title>Finished Match</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style><%@include file="css/styles.css"%></style>
 </head>
 
 <body>
-    <jsp:include page="header.jsp"/>
-    <h1>Finished match</h1>
+<header><jsp:include page="header.jsp"/></header>
+
     <div class="finished-match-container">
-        <table>
-            <tr>
-                <th>Players</th>
-                <th>Sets</th>
-            </tr>
+        <div class="header"><h1>Finished match</h1></div>
+        <div class="table">
+            <div class="table-row">
+                <div class="table-data">Players</div>
+                <div class="table-data">Sets</div>
+            </div>
 
-            <tr>
-                <td>${name1}</td>
-                <td>${firstPlayerScore}</td>
-            </tr>
-            <tr>
-                <td>${name2}</td>
-                <td>${secondPlayerScore}</td>
-            </tr>
-        </table>
+            <div class="table-row">
+                <div class="table-data">${name1}</div>
+                <div class="table-data">${firstPlayerScore}</div>
+            </div>
+
+            <div class="table-row">
+                <div class="table-data">${name2}</div>
+                <div class="table-data">${secondPlayerScore}</div>
+            </div>
+        </div>
     </div>
-
 </body>
 </html>
