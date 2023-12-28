@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="view/new-game-style.css" />
     </head>
 
+    <jsp:include page="header.jsp"/>
     <body>
         <div class="container">
             <form action = "http://localhost:8080/new-match" method="POST">

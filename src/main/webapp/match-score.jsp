@@ -8,6 +8,7 @@
 </head>
 
 <body>
+<jsp:include page="header.jsp"/>
 <table>
     <tr>
         <th>Players</th>

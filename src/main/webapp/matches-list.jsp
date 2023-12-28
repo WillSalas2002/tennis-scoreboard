@@ -6,6 +6,7 @@
     <title>Completed Matches</title>
 </head>
 <body>
+    <jsp:include page="header.jsp"/>
     <h1>The List of Completed Matches</h1>
     <form action="/matches" method="get">
         <label for="name_seeker">Name:
@@ -57,8 +58,6 @@
             </table>
         </tr>
     </table>
-
-    <a href="view/home.jsp">home</a>
 
 </body>
 </html>
