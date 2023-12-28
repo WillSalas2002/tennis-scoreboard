@@ -149,3 +149,30 @@ form {
     justify-content: center;
     align-items: center;
 }
+
+.matches-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-field {
+    display: flex;
+    background-color: #15154b;
+}
+
+.page-numbers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-buttons {
+    background-color: #309afa;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+    width: 30px;
+    height: 20px;
+}
