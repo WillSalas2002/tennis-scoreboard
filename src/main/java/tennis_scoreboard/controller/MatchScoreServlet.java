@@ -25,30 +25,32 @@ public class MatchScoreServlet extends HttpServlet {
 
         UUID uuid = UUID.fromString(uuidStr);
 
-        Match match = MatchTemp.retrieveMatch(uuid);
+        Match match = TempMatchesStorage.retrieveMatch(uuid);
 
-        String name1 = match.getPlayer1().getName();
-        String name2 = match.getPlayer2().getName();
+        Player player1 = match.getPlayer1();
+        Player player2 = match.getPlayer2();
 
-        req.setAttribute("match", match);
-        req.setAttribute("name1", name1);
-        req.setAttribute("name2", name2);
+        req.setAttribute("uuid", uuid);
+        req.setAttribute("player1", player1);
+        req.setAttribute("player2", player2);
 
-        req.getRequestDispatcher("view/match-score.jsp").forward(req, resp);
+        req.getRequestDispatcher("/match-score.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String p1Name = req.getParameter("winner");
+        String pointWinnerStr = req.getParameter("pointWinnerId");
         String matchUuid = req.getParameter("uuid");
 
         UUID uuid = UUID.fromString(matchUuid);
-        Match match = MatchTemp.retrieveMatch(uuid);
+        Match match = TempMatchesStorage.retrieveMatch(uuid);
 
-        if ("Player 1".equals(p1Name)) {
+        int pointWinner = Integer.parseInt(pointWinnerStr);
+
+        if (match.getPlayer1().getId() == pointWinner) {
             match.getGameScore().addScoreToFirstPlayer();
-        } else if ("Player 2".equals(p1Name)) {
+        } else {
             match.getGameScore().addScoreToSecondPlayer();
         }
 
@@ -65,7 +67,9 @@ public class MatchScoreServlet extends HttpServlet {
             req.setAttribute("name1", match.getPlayer1().getName());
             req.setAttribute("name2", match.getPlayer2().getName());
 
-            req.getRequestDispatcher("view/finished-match.jsp").forward(req, resp);
+            TempMatchesStorage.deleteMatch(uuid);
+
+            getServletContext().getRequestDispatcher("/finished-match.jsp").forward(req, resp);
 
         } else {
             doGet(req, resp);
